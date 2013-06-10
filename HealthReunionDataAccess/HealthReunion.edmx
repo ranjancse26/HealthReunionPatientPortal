@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HealthReunionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="HealthReunionModelStoreContainer">
+          <EntitySet Name="Documents" EntityType="HealthReunionModel.Store.Documents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Patients" EntityType="HealthReunionModel.Store.Patients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Providers" EntityType="HealthReunionModel.Store.Providers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="HealthReunionModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Documents__Patie__35BCFE0A" Association="HealthReunionModel.Store.FK__Documents__Patie__35BCFE0A">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Documents__Provi__36B12243" Association="HealthReunionModel.Store.FK__Documents__Provi__36B12243">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patients__Provid__37A5467C" Association="HealthReunionModel.Store.FK__Patients__Provid__37A5467C">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="Document" Type="varbinary(max)" />
+          <Property Name="DocumentType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="MedicalRecordNumber" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="RegisteredWithHealthVault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="ProviderId" />
+          </Key>
+          <Property Name="ProviderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="ProviderLogo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProviderDescription" Type="varchar" MaxLength="500" />
+          <Property Name="PrivacyStatement" Type="varchar(max)" />
+          <Property Name="AuthorizationReason" Type="varchar" MaxLength="500" />
+          <Property Name="TermsOfUse" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ProviderId" Type="int" />
+          <Property Name="PatientId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Documents__Patie__35BCFE0A">
+          <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="1" />
+          <End Role="Documents" Type="HealthReunionModel.Store.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Documents__Provi__36B12243">
+          <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
+          <End Role="Documents" Type="HealthReunionModel.Store.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__Provid__37A5467C">
+          <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
+          <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthReunionModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HealthReunionEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Documents" EntityType="HealthReunionModel.Document" />
+          <EntitySet Name="Patients" EntityType="HealthReunionModel.Patient" />
+          <EntitySet Name="Providers" EntityType="HealthReunionModel.Provider" />
+          <EntitySet Name="Users" EntityType="HealthReunionModel.User" />
+          <AssociationSet Name="FK__Documents__Patie__35BCFE0A" Association="HealthReunionModel.FK__Documents__Patie__35BCFE0A">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Documents__Provi__36B12243" Association="HealthReunionModel.FK__Documents__Provi__36B12243">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patients__Provid__37A5467C" Association="HealthReunionModel.FK__Patients__Provid__37A5467C">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Type="Int32" Name="DocumentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="Int32" Name="ProviderId" Nullable="false" />
+          <Property Type="DateTime" Name="CreationTime" Nullable="false" Precision="3" />
+          <Property Type="Binary" Name="Document1" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="DocumentType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="HealthReunionModel.FK__Documents__Patie__35BCFE0A" FromRole="Document" ToRole="Patient" />
+          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK__Documents__Provi__36B12243" FromRole="Document" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Type="Int32" Name="PatientId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProviderId" Nullable="false" />
+          <Property Type="Guid" Name="MedicalRecordNumber" Nullable="false" />
+          <Property Type="DateTime" Name="DOB" Nullable="false" Precision="0" />
+          <Property Type="Boolean" Name="Sex" Nullable="false" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="RegisteredWithHealthVault" Nullable="false" />
+          <NavigationProperty Name="Documents" Relationship="HealthReunionModel.FK__Documents__Patie__35BCFE0A" FromRole="Patient" ToRole="Document" />
+          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK__Patients__Provid__37A5467C" FromRole="Patient" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ProviderId" />
+          </Key>
+          <Property Type="Int32" Name="ProviderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ProviderName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="ProviderLogo" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="ProviderDescription" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PrivacyStatement" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AuthorizationReason" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TermsOfUse" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Documents" Relationship="HealthReunionModel.FK__Documents__Provi__36B12243" FromRole="Provider" ToRole="Document" />
+          <NavigationProperty Name="Patients" Relationship="HealthReunionModel.FK__Patients__Provid__37A5467C" FromRole="Provider" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ProviderId" />
+          <Property Type="Int32" Name="PatientId" />
+        </EntityType>
+        <Association Name="FK__Documents__Patie__35BCFE0A">
+          <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="HealthReunionModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Documents__Provi__36B12243">
+          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="HealthReunionModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__Provid__37A5467C">
+          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthReunionModelStoreContainer" CdmEntityContainer="HealthReunionEntities">
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="HealthReunionModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Document1" ColumnName="Document" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="HealthReunionModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="RegisteredWithHealthVault" ColumnName="RegisteredWithHealthVault" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="MedicalRecordNumber" ColumnName="MedicalRecordNumber" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="HealthReunionModel.Provider">
+              <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
+                <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
+                <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
+                <ScalarProperty Name="ProviderDescription" ColumnName="ProviderDescription" />
+                <ScalarProperty Name="ProviderLogo" ColumnName="ProviderLogo" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HealthReunionModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - HealthReunion Patient Portal</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    <style>
+        * {
+          margin: 0;
+        }
+        html, body {
+          height: 100%;
+        }
+        .page-wrap {
+          min-height: 100%;
+          /* equal to footer height */
+          margin-bottom: -70px; 
+        }
+        .page-wrap:after {
+          content: "";
+          display: block;
+        }
+        .site-footer, .page-wrap:after {
+          /* .push must be the same height as footer */
+          height: 40px; 
+        }
+        .site-footer {
+          background-color: cadetblue;
+        }
+    </style>
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <img src="~/Images/PatientPortal1.png" />
+                </div>
+                <div class="float-right">
+                     <nav>
+                        <ul id="menu" >
+                            <li class="btn btn-primary btn-large">@Html.ActionLink("View Documents", "Index", "Home")</li>
+                            <li class="btn btn-primary btn-large">@Html.ActionLink("About", "About", "Home")</li>
+                            <li class="btn btn-primary btn-large">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="btn btn-primary btn-large">@Html.ActionLink("HealthTopics", "HealthTopics", "Home")</li>
+                            <li class="btn btn-primary btn-large">@Html.ActionLink("Search Doctors", "Index", "Provider")</li>
+                            <li class="btn btn-primary btn-large">@Html.ActionLink("Logout", "LogOff", "Account")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div class="page-wrap">
+            <div id="body">           
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix">
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+        <footer>
+            <div class="site-footer">
+                <div class="float-left">
+                    <p style="color:white">&copy; @DateTime.Now.Year - Designed and Developed by Ranjan Dailata</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientPortal", "PatientPortal\PatientPortal.csproj", "{84BF0747-B646-4678-8168-C9A4D2265465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthReunionDataAccess", "HealthReunionDataAccess\HealthReunionDataAccess.csproj", "{9CC5EFF6-B635-4BE1-8DDF-01719DA89F5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84BF0747-B646-4678-8168-C9A4D2265465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BF0747-B646-4678-8168-C9A4D2265465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BF0747-B646-4678-8168-C9A4D2265465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BF0747-B646-4678-8168-C9A4D2265465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC5EFF6-B635-4BE1-8DDF-01719DA89F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC5EFF6-B635-4BE1-8DDF-01719DA89F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC5EFF6-B635-4BE1-8DDF-01719DA89F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC5EFF6-B635-4BE1-8DDF-01719DA89F5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
