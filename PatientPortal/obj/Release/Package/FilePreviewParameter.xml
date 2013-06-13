@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="healthreunionpatients" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Intel\\Documents\\Visual\ Studio\ 2012\\Projects\\PatientPortal\\PatientPortal\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Intel\\Documents\\Visual\ Studio\ 2012\\Projects\\PatientPortal\\PatientPortal\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="DefaultConnection_ConnectionString" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Intel\\Documents\\Visual\ Studio\ 2012\\Projects\\PatientPortal\\PatientPortal\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="HealthReunionEntities-Web.config Connection String" description="" value="metadata=res://*/HealthReunion.csdl|res://*/HealthReunion.ssdl|res://*/HealthReunion.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=k4khur5orl.database.windows.net;Initial Catalog=HealthReunion;User ID=ranjan;Password=sql2012#;MultipleActiveResultSets=True;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Intel\\Documents\\Visual\ Studio\ 2012\\Projects\\PatientPortal\\PatientPortal\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='HealthReunionEntities']/@connectionString" />
+  </parameter>
+</parameters>

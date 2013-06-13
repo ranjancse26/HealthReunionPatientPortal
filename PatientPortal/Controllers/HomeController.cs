@@ -37,7 +37,7 @@ namespace PatientPortal.Controllers
             ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
             return View(documentModel);
         }
- 
+           
         public ActionResult About()
         {
             ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";

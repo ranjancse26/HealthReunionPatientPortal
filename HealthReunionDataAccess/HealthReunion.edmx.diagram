@@ -8,10 +8,10 @@
         <EntityTypeShape EntityType="HealthReunionModel.Document" Width="1.5" PointX="0.16477505125327738" PointY="18.449564689048362" />
         <EntityTypeShape EntityType="HealthReunionModel.Patient" Width="1.5" PointX="3.4332591571999989" PointY="21.787133837950943" />
         <EntityTypeShape EntityType="HealthReunionModel.Provider" Width="1.5" PointX="8.1672635507617457" PointY="9.2555256827061658" />
-        <EntityTypeShape EntityType="HealthReunionModel.User" Width="1.5" PointX="12" PointY="9.25" />
         <AssociationConnector Association="HealthReunionModel.FK__Documents__Patie__35BCFE0A" />
         <AssociationConnector Association="HealthReunionModel.FK__Documents__Provi__36B12243" />
         <AssociationConnector Association="HealthReunionModel.FK__Patients__Provid__37A5467C" />
+        <EntityTypeShape EntityType="HealthReunionModel.User" Width="1.5" PointX="5.4723450771869828" PointY="31.88644251222091" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

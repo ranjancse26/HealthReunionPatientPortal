@@ -19,5 +19,6 @@ namespace HealthReunionDataAccess
         public string Password { get; set; }
         public Nullable<int> ProviderId { get; set; }
         public Nullable<int> PatientId { get; set; }
+        public bool IsDefaultPassword { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace PatientPortal.Models
         public string Locality { get; set; }
         public string Insurances { get; set; }
         public string Npi { get; set; }
-        public string Region { get; set; }   
+        public string Region { get; set; }
+        public int Meters { get; set; }
     }
 }

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HealthReunionModelStoreContainer" CdmEntityContainer="HealthReunionEntities">
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="HealthReunionModel.Document">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="Document1" ColumnName="Document" />
+          <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="HealthReunionModel.Patient">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="RegisteredWithHealthVault" ColumnName="RegisteredWithHealthVault" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="MedicalRecordNumber" ColumnName="MedicalRecordNumber" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="HealthReunionModel.Provider">
+        <MappingFragment StoreEntitySet="Providers">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
+          <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
+          <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
+          <ScalarProperty Name="ProviderDescription" ColumnName="ProviderDescription" />
+          <ScalarProperty Name="ProviderLogo" ColumnName="ProviderLogo" />
+          <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="HealthReunionModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsDefaultPassword" ColumnName="IsDefaultPassword" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

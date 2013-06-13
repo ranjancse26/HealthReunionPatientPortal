@@ -10,14 +10,6 @@ using System.Web;
 /// </summary>
 public class UserRepository
 {
-	public UserRepository()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
-
-
     public User GetUserById(int patientId)
     {
         using (var dataContext = new HealthReunionEntities())
@@ -49,6 +41,7 @@ public class UserRepository
             if (original != null)
             {
                 original.Password = EncryptDecrypt.EncryptData(user.Password, EncryptDecrypt.ReadCert());
+                original.IsDefaultPassword = false;
             }
             dataContext.SaveChanges();
         }

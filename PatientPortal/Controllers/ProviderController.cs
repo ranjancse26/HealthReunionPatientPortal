@@ -2,8 +2,7 @@
 using PatientPortal.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -73,6 +72,75 @@ namespace HealthCareProvider.Controllers
             ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
             var providers = GetProviders(filter);
             return PartialView("ProvidersWebGrid", providers); 
+        }
+
+        [HttpGet]
+        public ActionResult SendEmail()
+        {
+            if (Session["PatientId"] == null || Session["PatientId"].ToString() == "")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+            var emailViewModel = new Email();
+            emailViewModel.Providers = new DrodownItemsViewModel();
+            emailViewModel.Providers.Items = GetProviders();
+            return View(emailViewModel);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SendEmail(Email email)
+        {
+            StringBuilder errorStringBuilder = new StringBuilder();
+            var emailViewModel = new Email();
+                
+            if (email.Subject == null)
+            {
+               errorStringBuilder.AppendLine("Subject cannot be empty");
+            }
+            if (email.MessageBody == null)
+            {
+                errorStringBuilder.AppendLine("\nEmail Body cannot be empty");
+            }
+            if (errorStringBuilder.ToString() != "")
+            {
+                ViewBag.ErrorMessage = errorStringBuilder.ToString();
+            }
+
+            try
+            {               
+                SendEmailToProvider(email);
+
+                emailViewModel.Providers = new DrodownItemsViewModel();
+                emailViewModel.Providers.Items = GetProviders();         
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            ViewBag.SuccessMessage = "Email sent successfully!";
+            return View(emailViewModel);
+        }
+
+        private void SendEmailToProvider(Email emailModel)
+        {
+            var fromEmailAddress = new PatientRepository().GetEmailAddress(int.Parse(Session["PatientId"].ToString()));
+            var smptSendGrid = new SMTPApi(fromEmailAddress, new List<string>{ emailModel.Providers.SelectedItemId });
+            smptSendGrid.SimpleEmail(emailModel.Subject, emailModel.MessageBody);
+        }
+
+        private List<SelectListItem> GetProviders()
+        {
+            var providersList = new ProviderRepository().GetAllProviders();
+            var selectedListItems = new List<SelectListItem>();
+
+            foreach (var provider in providersList)
+            {
+                selectedListItems.Add(new SelectListItem { Text = provider.ProviderName, Value = provider.Email.ToString() });
+            }
+            return selectedListItems;
         }
     }
 }

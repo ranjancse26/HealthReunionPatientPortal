@@ -1,0 +1,44 @@
+﻿@model PatientPortal.Models.LoginModel
+
+@{
+    ViewBag.Title = "Please sign in";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                 <h2>@ViewBag.TitleMessage</h2>
+            </hgroup>      
+        </div>
+    </section>
+}
+
+<p>
+   Patient Portal lets patients communicate with their doctor and access important information over the Internet. Your practice can send patients reminders, statements, patient education materials, and lab results electronically. Since communication is a key to preventative medicine.
+</p>
+
+<br />
+<section id="loginForm">
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <H2>Please sign in</H2>
+    <input type="text" id="UserName" name="UserName" class="input-block-level" placeholder="User Name"> 
+     @Html.ValidationMessageFor(m => m.UserName)
+    <br />
+    <input type="password" id="Password" name="Password" class="input-block-level" placeholder="Password">   
+    @Html.ValidationMessageFor(m => m.Password) 
+    <br />
+    <input type="submit" class="btn btn-primary btn-large" value="Log in" />
+}
+</section>
+
+<section class="social" id="socialLoginForm">
+    <img src="~/Images/Doctor.jpg" height="200" width="150" />
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

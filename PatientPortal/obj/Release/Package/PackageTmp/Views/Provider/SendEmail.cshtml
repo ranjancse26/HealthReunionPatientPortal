@@ -1,0 +1,41 @@
+﻿@model PatientPortal.Models.Email
+@{
+    ViewBag.Title = "Send Email";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                 <h2>@ViewBag.TitleMessage</h2>
+            </hgroup>      
+        </div>
+    </section>
+}
+
+<h2>Send Email</h2>
+
+<!-- Place inside the <head> of your HTML -->
+<script type="text/javascript" src="~/Scripts/tinymce/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea"
+ });
+</script>
+
+
+<!-- Place this in the body of the page content -->
+<form method="post">
+    <div style="color:red">
+        @ViewBag.ErrorMessage
+    </div>
+    <div style="color:green">
+        @ViewBag.SuccessMessage
+    </div>
+    <br />
+    @Html.DropDownListFor(x => x.Providers.SelectedItemId, Model.Providers.Items)
+    <input id="Subject" name="Subject" type="text" value="" class="input-block-level" placeholder="Subject" style="width:50%" />
+    <br />      
+    <textarea id="MessageBody" name="MessageBody" style="height:250px"></textarea>
+    <br />   
+    <button value="Send" type="submit" class="btn btn-small btn-primary">Send</button>    
+</form>

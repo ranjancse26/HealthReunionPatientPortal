@@ -9,13 +9,6 @@ using System.Web;
 /// </summary>
 public class DocumentRepository
 {
-	public DocumentRepository()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
-
     public void AddDocuments(Document document)
     {
         using (var dataContext = new HealthReunionEntities())

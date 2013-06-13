@@ -17,6 +17,18 @@ public class PatientRepository
 		//
 	}
 
+    public string GetEmailAddress(int patientID)
+    {
+        using (var dataContext = new HealthReunionEntities())
+        {
+            var patient = dataContext.Patients.Where(p => p.PatientId == patientID).FirstOrDefault();
+            if (patient != null)
+                return patient.Email;
+
+            return string.Empty;
+        }
+    }
+
     public Patient GetPatientById(int patientID)
     {
         using (var dataContext = new HealthReunionEntities())

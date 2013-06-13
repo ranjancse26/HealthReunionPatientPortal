@@ -22,9 +22,10 @@ namespace PatientPortal.Controllers
         {
             try
             {
-                if (ModelState.IsValid && ValidateUser(model.UserName, model.Password))
+                bool isDefaultPassword = false;
+                if (ModelState.IsValid && ValidateUser(model.UserName, model.Password, out isDefaultPassword))
                 {
-                    if (model.Password.Equals("Password1"))
+                    if (isDefaultPassword)
                     {
                         return RedirectToAction("ChangePassword");
                     }
@@ -72,19 +73,19 @@ namespace PatientPortal.Controllers
             return RedirectToLocal();
         }
 
-        private bool ValidateUser(string userName, string passWord)
+        private bool ValidateUser(string userName, string passWord, out bool isDefaultPassword)
         {
             try
             {
                 passWord = EncryptDecrypt.EncryptData(passWord, EncryptDecrypt.ReadCert());
                 using(var dataContext = new HealthReunionDataAccess.HealthReunionEntities())
                 {
-                    var patient = (from user in dataContext.Users
-                                   where user.UserName.Equals(userName) && user.Password.Equals(passWord) && user.ProviderId == null
-                                   select user).FirstOrDefault();
-                    if(patient != null){
-                        Session["PatientId"] = patient.PatientId;
-                        Session["UserId"] = patient.UserId;
+                    var user = (from u in dataContext.Users
+                                   where u.UserName.Equals(userName) && u.Password.Equals(passWord) && u.ProviderId == null
+                                   select u).FirstOrDefault();
+                    if(user != null){
+                        Session["PatientId"] = user.PatientId;
+                        isDefaultPassword = user.IsDefaultPassword;
                         return true;
                     }
                 }
@@ -93,6 +94,7 @@ namespace PatientPortal.Controllers
             {
                 throw ex;
             }
+            isDefaultPassword = false;
             return false;
        }
 

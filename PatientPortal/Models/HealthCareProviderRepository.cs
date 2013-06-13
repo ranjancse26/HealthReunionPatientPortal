@@ -28,7 +28,7 @@ namespace PatientPortal.Models
                 var query = new Query();
                 if (filter.Latitude != 0 && filter.Longitude != 0)
                 {
-                    query.WithIn(new Circle(filter.Latitude, filter.Longitude, 1000));
+                    query.WithIn(new Circle(filter.Latitude, filter.Longitude, filter.Meters));
                 }
 
                 if (!string.IsNullOrWhiteSpace(filter.Category))

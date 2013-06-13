@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HealthReunionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="HealthReunionModelStoreContainer">
+    <EntitySet Name="Documents" EntityType="HealthReunionModel.Store.Documents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Patients" EntityType="HealthReunionModel.Store.Patients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Providers" EntityType="HealthReunionModel.Store.Providers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="HealthReunionModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Documents__Patie__35BCFE0A" Association="HealthReunionModel.Store.FK__Documents__Patie__35BCFE0A">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="Documents" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Documents__Provi__36B12243" Association="HealthReunionModel.Store.FK__Documents__Provi__36B12243">
+      <End Role="Providers" EntitySet="Providers" />
+      <End Role="Documents" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patients__Provid__37A5467C" Association="HealthReunionModel.Store.FK__Patients__Provid__37A5467C">
+      <End Role="Providers" EntitySet="Providers" />
+      <End Role="Patients" EntitySet="Patients" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="DocumentId" />
+    </Key>
+    <Property Name="DocumentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+    <Property Name="Document" Type="varbinary(max)" />
+    <Property Name="DocumentType" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Patients">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="MedicalRecordNumber" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Sex" Type="bit" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="500" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="RegisteredWithHealthVault" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Providers">
+    <Key>
+      <PropertyRef Name="ProviderId" />
+    </Key>
+    <Property Name="ProviderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProviderName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="ProviderLogo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProviderDescription" Type="varchar" MaxLength="500" />
+    <Property Name="PrivacyStatement" Type="varchar(max)" />
+    <Property Name="AuthorizationReason" Type="varchar" MaxLength="500" />
+    <Property Name="TermsOfUse" Type="varchar" MaxLength="500" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="ProviderId" Type="int" />
+    <Property Name="PatientId" Type="int" />
+    <Property Name="IsDefaultPassword" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Documents__Patie__35BCFE0A">
+    <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="1" />
+    <End Role="Documents" Type="HealthReunionModel.Store.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patients">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Documents__Provi__36B12243">
+    <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
+    <End Role="Documents" Type="HealthReunionModel.Store.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Providers">
+        <PropertyRef Name="ProviderId" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patients__Provid__37A5467C">
+    <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
+    <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Providers">
+        <PropertyRef Name="ProviderId" />
+      </Principal>
+      <Dependent Role="Patients">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

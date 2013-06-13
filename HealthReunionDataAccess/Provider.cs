@@ -27,6 +27,7 @@ namespace HealthReunionDataAccess
         public string PrivacyStatement { get; set; }
         public string AuthorizationReason { get; set; }
         public string TermsOfUse { get; set; }
+        public string Email { get; set; }
     
         public virtual ICollection<Document> Documents { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }

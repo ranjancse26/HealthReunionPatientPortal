@@ -47,6 +47,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.5.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGridMail">
+      <HintPath>..\packages\Sendgrid.1.1.1\lib\net40\SendGridMail.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -195,8 +201,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\SMTPApi.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\DrodownItemsViewModel.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\HealthCareProviderRepository.cs" />
     <Compile Include="Models\IRepository.cs" />
@@ -310,6 +319,84 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\tinymce\changelog.txt" />
+    <Content Include="Scripts\tinymce\js\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\compat3x\editable_selects.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\compat3x\form_utils.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\compat3x\mctabs.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\compat3x\tiny_mce_popup.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\compat3x\validate.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\example\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\example_dependency\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\layer\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon-small.svg" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon.svg" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\img\wline.gif" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\skin.classic.min.css" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\tinymce\js\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\js\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\tinymce\LICENSE.TXT" />
     <Content Include="Scripts\yqlgeo.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -347,6 +434,15 @@
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Provider\ProvidersWebGrid.cshtml" />
     <Content Include="Views\Home\PatientDocumentsWebGrid.cshtml" />
+    <Content Include="Scripts\tinymce\js\tinymce\langs\readme.md" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon-small.eot" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon-small.ttf" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon-small.woff" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon.eot" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon.ttf" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon.woff" />
+    <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\readme.md" />
+    <Content Include="Views\Provider\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

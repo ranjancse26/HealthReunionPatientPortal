@@ -66,6 +66,7 @@
           <Property Name="PrivacyStatement" Type="varchar(max)" />
           <Property Name="AuthorizationReason" Type="varchar" MaxLength="500" />
           <Property Name="TermsOfUse" Type="varchar" MaxLength="500" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -76,6 +77,7 @@
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="ProviderId" Type="int" />
           <Property Name="PatientId" Type="int" />
+          <Property Name="IsDefaultPassword" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK__Documents__Patie__35BCFE0A">
           <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="1" />
@@ -121,7 +123,6 @@
           <EntitySet Name="Documents" EntityType="HealthReunionModel.Document" />
           <EntitySet Name="Patients" EntityType="HealthReunionModel.Patient" />
           <EntitySet Name="Providers" EntityType="HealthReunionModel.Provider" />
-          <EntitySet Name="Users" EntityType="HealthReunionModel.User" />
           <AssociationSet Name="FK__Documents__Patie__35BCFE0A" Association="HealthReunionModel.FK__Documents__Patie__35BCFE0A">
             <End Role="Patient" EntitySet="Patients" />
             <End Role="Document" EntitySet="Documents" />
@@ -134,6 +135,7 @@
             <End Role="Provider" EntitySet="Providers" />
             <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="HealthReunionModel.User" />
         </EntityContainer>
         <EntityType Name="Document">
           <Key>
@@ -184,16 +186,7 @@
           <Property Type="String" Name="TermsOfUse" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Documents" Relationship="HealthReunionModel.FK__Documents__Provi__36B12243" FromRole="Provider" ToRole="Document" />
           <NavigationProperty Name="Patients" Relationship="HealthReunionModel.FK__Patients__Provid__37A5467C" FromRole="Provider" ToRole="Patient" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="ProviderId" />
-          <Property Type="Int32" Name="PatientId" />
+          <Property Type="String" Name="Email" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Documents__Patie__35BCFE0A">
           <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="1" />
@@ -231,6 +224,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ProviderId" />
+          <Property Type="Int32" Name="PatientId" />
+          <Property Type="Boolean" Name="IsDefaultPassword" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -274,6 +278,7 @@
           <EntitySetMapping Name="Providers">
             <EntityTypeMapping TypeName="HealthReunionModel.Provider">
               <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
                 <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
                 <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
@@ -287,6 +292,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="HealthReunionModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsDefaultPassword" ColumnName="IsDefaultPassword" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
