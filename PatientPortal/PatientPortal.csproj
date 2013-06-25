@@ -202,7 +202,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\SMTPApi.cs" />
+    <Compile Include="Helper\StringValueAttribute.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AppointmentViewModel.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DrodownItemsViewModel.cs" />
     <Compile Include="Models\Email.cs" />
@@ -303,6 +305,7 @@
     <Content Include="Images\PatientPortal.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\PatientPortalLogo.png" />
     <Content Include="SampleCCRCCD\SampleCCD.xml" />
     <Content Include="SampleCCRCCD\SampleCCR.xml" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -443,6 +446,9 @@
     <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\icomoon.woff" />
     <Content Include="Scripts\tinymce\js\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Views\Provider\SendEmail.cshtml" />
+    <Content Include="Views\Provider\RequestAppointment.cshtml" />
+    <Content Include="Views\Provider\PatientAppointmentWebGrid.cshtml" />
+    <Content Include="Views\Provider\AppointmentAvailaibilitySlotsWebGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

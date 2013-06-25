@@ -1,6 +1,7 @@
 ﻿using HealthReunionDataAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Transactions;
 using System.Web;
@@ -35,12 +36,36 @@ public class ProviderRepository
         }
     }
     
+    public bool CheckIfUserNameExists(string userName)
+    {
+        using (var dataContext = new HealthReunionEntities())
+        {
+            return dataContext.Users.Where(u => u.UserName.Trim() == userName && u.PatientId == null).FirstOrDefault() != null ;
+        }
+    }
+
+
+    public bool CheckIfProviderNameExists(string providerName)
+    {
+        using (var dataContext = new HealthReunionEntities())
+        {
+            return dataContext.Providers.Where(p => p.ProviderName.Trim() == providerName).FirstOrDefault() != null;
+        }
+    }
+    
     public void AddProviderWithDefaultUser(Provider provider, User user)
     {        
         using (TransactionScope scope = new TransactionScope())
         {
             using (var dataContext = new HealthReunionEntities())
             {
+
+                if (CheckIfUserNameExists(user.UserName))
+                    throw new Exception("User name already exist");
+          
+                if(CheckIfProviderNameExists(provider.ProviderName))
+                    throw new Exception("Provider name already exist");
+
                 // Add provider enity
                 dataContext.Providers.Add(provider);
 
@@ -49,6 +74,8 @@ public class ProviderRepository
 
                 user.ProviderId = provider.ProviderId;
 
+                user.Password = EncryptDecrypt.EncryptData(user.Password, EncryptDecrypt.ReadCert());
+                                
                 // Add user entity
                 dataContext.Users.Add(user);
 

@@ -16,19 +16,20 @@ namespace HealthReunionDataAccess
     {
         public Provider()
         {
+            this.Appointments = new HashSet<Appointment>();
             this.Documents = new HashSet<Document>();
             this.Patients = new HashSet<Patient>();
         }
     
         public int ProviderId { get; set; }
         public string ProviderName { get; set; }
-        public byte[] ProviderLogo { get; set; }
         public string ProviderDescription { get; set; }
         public string PrivacyStatement { get; set; }
         public string AuthorizationReason { get; set; }
         public string TermsOfUse { get; set; }
         public string Email { get; set; }
     
+        public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
     }

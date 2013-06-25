@@ -35,20 +35,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Providers">
-      <EntityTypeMapping TypeName="HealthReunionModel.Provider">
-        <MappingFragment StoreEntitySet="Providers">
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
-          <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
-          <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
-          <ScalarProperty Name="ProviderDescription" ColumnName="ProviderDescription" />
-          <ScalarProperty Name="ProviderLogo" ColumnName="ProviderLogo" />
-          <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
-          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="HealthReunionModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -58,6 +44,32 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="HealthReunionModel.Appointment">
+        <MappingFragment StoreEntitySet="Appointments">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="ReasonForVisit" ColumnName="ReasonForVisit" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="HealthReunionModel.Provider">
+        <MappingFragment StoreEntitySet="Providers">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
+          <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
+          <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
+          <ScalarProperty Name="ProviderDescription" ColumnName="ProviderDescription" />
+          <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppointementRepository.cs" />
+    <Compile Include="Appointment.cs">
+      <DependentUpon>HealthReunion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Document.cs">
       <DependentUpon>HealthReunion.tt</DependentUpon>
     </Compile>
@@ -78,6 +82,7 @@
       <DependentUpon>HealthReunion.tt</DependentUpon>
     </Compile>
     <Compile Include="ProviderRepository.cs" />
+    <Compile Include="StringValueAttribute.cs" />
     <Compile Include="User.cs">
       <DependentUpon>HealthReunion.tt</DependentUpon>
     </Compile>

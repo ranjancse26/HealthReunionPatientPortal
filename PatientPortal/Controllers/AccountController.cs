@@ -9,7 +9,7 @@ namespace PatientPortal.Controllers
     {
         public ActionResult Login()
         {
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+            
             return View();
         }
 
@@ -44,8 +44,7 @@ namespace PatientPortal.Controllers
         }
 
         public ActionResult ChangePassword()
-        {
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+        {            
             var loginModel = new LocalPasswordModel();
             loginModel.UserId = int.Parse(Session["UserId"].ToString());
             return View(loginModel);
@@ -77,14 +76,32 @@ namespace PatientPortal.Controllers
         {
             try
             {
-                passWord = EncryptDecrypt.EncryptData(passWord, EncryptDecrypt.ReadCert());
-                using(var dataContext = new HealthReunionDataAccess.HealthReunionEntities())
+                using (var dataContext = new HealthReunionDataAccess.HealthReunionEntities())
                 {
                     var user = (from u in dataContext.Users
-                                   where u.UserName.Equals(userName) && u.Password.Equals(passWord) && u.ProviderId == null
-                                   select u).FirstOrDefault();
+                                where u.UserName.Equals(userName) && u.Password.Equals(passWord) && u.ProviderId == null
+                                select u).FirstOrDefault();
+
+                    // If it's the first time Patient Logging in , The password will be by default encrypted. So we are just checking whether the
+                    // Matching user exist for the user credential.
+                    if (user != null && user.IsDefaultPassword)
+                    {
+                        Session["PatientId"] = user.PatientId;
+                        Session["UserId"] = user.UserId;
+                        isDefaultPassword = user.IsDefaultPassword;
+                        return true;
+                    }
+                    else
+                    {
+                        passWord = EncryptDecrypt.EncryptData(passWord, EncryptDecrypt.ReadCert());
+                        user = (from u in dataContext.Users
+                                where u.UserName.Equals(userName) && u.Password.Equals(passWord) && u.ProviderId == null
+                                select u).FirstOrDefault();
+                    }                    
+                   
                     if(user != null){
                         Session["PatientId"] = user.PatientId;
+                        Session["UserId"] = user.UserId;
                         isDefaultPassword = user.IsDefaultPassword;
                         return true;
                     }

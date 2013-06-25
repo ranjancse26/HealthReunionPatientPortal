@@ -20,6 +20,40 @@ public class UserRepository
             return user;
         }
     }
+    
+    public User GetUsersByPatientId(int patientId)
+    {
+        using (var dataContext = new HealthReunionEntities())
+        {
+            var user = (from u in dataContext.Users
+                        where u.PatientId == patientId
+                        select u).FirstOrDefault();
+            return user;
+        }
+    }
+
+    public List<User> GetUsersByProviderId(int providerId)
+    {
+        using (var dataContext = new HealthReunionEntities())
+        {
+            return (from u in dataContext.Users
+                        where u.ProviderId == providerId
+                        select u).ToList();          
+        }
+    }
+
+    public void RemoveUser(int userId)
+    {
+        using (var dataContext = new HealthReunionEntities())
+        {
+            var user = dataContext.Users.Find(userId);
+            if (user != null)
+            {
+                dataContext.Users.Remove(user);
+                dataContext.SaveChanges();
+            }
+        }
+    }
 
     public void AddUser(User user)
     {

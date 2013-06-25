@@ -6,3 +6,11 @@ C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\HealthReunion
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\HealthReunionDataAccess\obj\Release\HealthReunionDataAccess.csprojResolveAssemblyReference.cache
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\HealthReunionDataAccess\obj\Release\HealthReunionDataAccess.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\HealthReunionDataAccess\obj\Release\HealthReunionDataAccess.pdb
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\bin\Release\HealthReunionDataAccess.dll.config
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\bin\Release\HealthReunionDataAccess.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\bin\Release\HealthReunionDataAccess.pdb
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\bin\Release\EntityFramework.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\bin\Release\EntityFramework.xml
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\obj\Release\HealthReunionDataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\obj\Release\HealthReunionDataAccess.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\ProviderPortal\HealthReunionDataAccess\obj\Release\HealthReunionDataAccess.pdb

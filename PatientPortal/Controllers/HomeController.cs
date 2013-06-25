@@ -1,4 +1,5 @@
-﻿using PatientPortal.RenderXSLTExample;
+﻿using PatientPortal.Models;
+using PatientPortal.RenderXSLTExample;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,9 +21,13 @@ namespace PatientPortal.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            int patientId = int.Parse(Session["PatientId"].ToString());
+            var patientRepository = new PatientRepository();
+            int providerId = patientRepository.GetPatientById(patientId).ProviderId;
+
             var documentRepository = new DocumentRepository();
             var documentModel = new List<PatientDocumentsModel>();
-            documentModel = documentRepository.GetDocuments(int.Parse(Session["PatientId"].ToString()));
+            documentModel = documentRepository.GetDocuments(patientId, providerId);
 
             var ccrXslPath = Server.MapPath("~/ccr.xsl");
             var ccdXslPath = Server.MapPath("~/ccd.xsl");
@@ -33,35 +38,31 @@ namespace PatientPortal.Controllers
                 else if(doc.DocumentText.Contains("ClinicalDocument"))
                     doc.DocumentText = HtmlHelperExtensions.RenderXslt(ccdXslPath, doc.DocumentText).ToHtmlString();
             }
-
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+                        
             return View(documentModel);
         }
            
         public ActionResult About()
-        {
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+        {            
             ViewBag.Message = "Designed and Developed by Ranjan Dailata.";
 
             return View();
         }
 
         public ActionResult Contact()
-        {
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+        {            
             return View();
         }
 
         public ActionResult HealthTopics()
-        {
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+        {            
             return View();
         }
 
         [HttpPost]
         public ActionResult HealthTopics(FormCollection formCollection)
         {
-            ViewBag.TitleMessage = "Welcome to HealthReunion Patient Portal";
+            
             string webUrl = string.Empty;
             string healthTopicName = "";
 
@@ -120,10 +121,10 @@ namespace PatientPortal.Controllers
                 var xmlDoc = XDocument.Load(response.GetResponseStream());
                 return (xmlDoc);
             }
-            catch (Exception e)
+            catch 
             {
                  return null;
             }
-        }
+        }        
     }
 }

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<HealthReunionDataAccess.Appointment>
+
+@{
+    var grid = new WebGrid(Model, canPage: false, canSort:false, defaultSort: "Name");
+}
+
+@if (Model.Count() == 0)
+{
+    <p>No appointments</p>
+}
+else
+{   
+   @grid.GetHtml(htmlAttributes: new {id ="grid"}, 
+    tableStyle: "table table-striped table-hover",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-row-style",
+    selectedRowStyle: "webgrid-selected-row",
+    rowStyle: "webgrid-row-style",
+    columns: grid.Columns(
+            grid.Column("Time", format: @<text>@item.Time</text>),
+            grid.Column("Status", format: @<text>@item.Status</text>),
+            grid.Column("Reason", format: @<text>@item.ReasonForVisit</text>)
+           )
+     )
+}

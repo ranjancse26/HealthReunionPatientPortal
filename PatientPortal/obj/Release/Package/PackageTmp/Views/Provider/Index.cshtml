@@ -3,16 +3,6 @@
     ViewBag.Title = "HealthCare Provider Search";
 }
 
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                 <h2>@ViewBag.TitleMessage</h2>
-            </hgroup>      
-        </div>
-    </section>
-}
-
 @*http://mobile.tutsplus.com/tutorials/mobile-web-apps/html5-geolocation/*@
 @*http://www.my-html-codes.com/HTML5_tutorials/geolocation-simple.html*@
 @*http://www.factual.com/data-apis/places/healthcare*@
@@ -22,18 +12,24 @@
 <link href="http://www.google.com/uds/css/gsearch.css" rel="stylesheet" type="text/css"/> 
 <script src="~/Scripts/yqlgeo.js"></script>
 
+<h2>Search Doctors</h2> <br />
+
+<p>Note - If you are searching doctors by Location, You will also have to specify the distance in'Meters' value.</p> <br />
+
 <form id="JqAjaxForm">
      <fieldset>
-        <legend>Advanced Search</legend>
+        <legend>Search Doctors</legend>
+         @Html.ValidationSummary(true)
         <input id="Longitude" name="Longitude" type="text" value="" class="input-block-level" placeholder="Longitude" style="width:auto" /> <br />
         <input id="Latitude" name="Latitude" type="text" value="" class="input-block-level" placeholder="Latitude" style="width:auto" /> <br />
+        <input id="Meters" name="Meters" type="text" value="" class="input-block-level" placeholder="Meters" style="width:auto" /> <br />        
+      
         <input id="Insurances" name="Insurances" type="text" value="" class="input-block-level" placeholder="Insurances" style="width:auto" /> <br />
         <input id="Npi" name="Npi" type="text" value="" class="input-block-level" placeholder="Npi" style="width:auto" /> <br />
         <input id="Locality" name="Locality" type="text" value="" class="input-block-level" placeholder="Locality" style="width:auto" /> <br />
         <input id="Region" name="Region" type="text" value="" class="input-block-level" placeholder="Region" style="width:auto" /> <br />
-        <input id="Meters" name="Meters" type="text" value="" class="input-block-level" placeholder="Meters" style="width:auto" /> <br />        
-         <button id="btnGeoLocation" class="btn btn-small btn-primary" onclick="initiate_geolocation(); return false;">Current Location</button>  
-        &nbsp;&nbsp;<button value="Search" class="btn btn-small btn-primary" onclick="Search(); return false;">Search</button>  
+         <button id="btnGeoLocation" class="btn btn-large btn-primary" onclick="initiate_geolocation(); return false;">Current Location</button>  
+        &nbsp;&nbsp;<button value="Search" class="btn btn-large btn-primary" onclick="Search(); return false;">Search</button>  
     </fieldset>
 </form>
 

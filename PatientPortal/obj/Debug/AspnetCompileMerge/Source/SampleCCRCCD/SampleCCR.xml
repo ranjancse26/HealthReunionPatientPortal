@@ -1,0 +1,98 @@
+<ContinuityOfCareRecord xmlns="urn:astm-org:CCR" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:astm-org:CCR CCR_20051109.xsd">
+  <!--
+********************************************************
+  CCR Header
+********************************************************
+-->
+  <CCRDocumentObjectID>db734647-fc99-424c-a864-7e3cda82e703</CCRDocumentObjectID>
+  <Language>
+    <Text>English</Text>
+    <Code>
+      <Value>en-US</Value>
+      <CodingSystem>IETF1766</CodingSystem>
+    </Code>
+  </Language>
+  <Version>V1.0</Version>
+  <DateTime>
+    <ExactDateTime>2000-04-07T13:00:00+0500</ExactDateTime>
+  </DateTime>
+  <Patient>
+    <ActorID>2-16-840-1-113883-19-5-996756495</ActorID>
+  </Patient>
+  <From>
+    <ActorLink>
+      <ActorID>8a54f393-8015-460c-abd2-f29aad15481c</ActorID>
+      <ActorRole>
+        <Text>author</Text>
+      </ActorRole>
+    </ActorLink>
+  </From>
+  <Purpose>
+    <Description>
+      <Text>Transfer of care</Text>
+      <Code>
+        <Value>308292007</Value>
+        <CodingSystem>SNOMED CT</CodingSystem>
+      </Code>
+    </Description>
+  </Purpose>
+  <Body>
+  </Body>
+  <Actors>
+    <Actor>
+      <ActorObjectID>2-16-840-1-113883-19-5-996756495</ActorObjectID>
+      <Person>
+        <Name>
+          <CurrentName>
+            <Given>Henry</Given>
+            <Family>Jones</Family>
+            <Suffix>the 7th</Suffix>
+          </CurrentName>
+        </Name>
+        <DateOfBirth>
+          <ExactDateTime>1932-09-24</ExactDateTime>
+        </DateOfBirth>
+        <Gender>
+          <Text>Male</Text>
+          <Code>
+            <Value>M</Value>
+            <CodingSystem>2.16.840.1.113883.5.1</CodingSystem>
+          </Code>
+        </Gender>
+      </Person>
+      <IDs>
+        <Type>
+          <Text>Patient ID</Text>
+        </Type>
+        <ID>2-16-840-1-113883-19-5-996756495</ID>
+        <IssuedBy>
+          <ActorID>2.16.840.1.113883.19.5</ActorID>
+        </IssuedBy>
+        <Source>
+          <Actor>
+            <ActorID>8a54f393-8015-460c-abd2-f29aad15481c</ActorID>
+          </Actor>
+        </Source>
+      </IDs>
+      <IDs>
+        <Type>
+          <Text>Covered party ID</Text>
+        </Type>
+        <ID>14d4a520-7aae-11db-9fe1-0800200c9a66</ID>
+        <IssuedBy>
+          <ActorID>329fcdf0-7ab3-11db-9fe1-0800200c9a66</ActorID>
+        </IssuedBy>
+        <Source>
+          <Actor>
+            <ActorID>8a54f393-8015-460c-abd2-f29aad15481c</ActorID>
+          </Actor>
+        </Source>
+      </IDs>
+      <Source>
+        <Actor>
+          <ActorID>8a54f393-8015-460c-abd2-f29aad15481c</ActorID>
+        </Actor>
+      </Source>
+    </Actor>
+  </Actors>
+</ContinuityOfCareRecord>

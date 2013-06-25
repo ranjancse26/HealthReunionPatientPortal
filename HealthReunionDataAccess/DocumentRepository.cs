@@ -28,7 +28,7 @@ public class DocumentRepository
         }
     }
 
-    public List<PatientDocumentsModel> GetDocuments(int patientId)
+    public List<PatientDocumentsModel> GetDocuments(int patientId, int providerId)
     {
         var patientDocumentsList = new List<PatientDocumentsModel>();
         using (var dataContext = new HealthReunionEntities())
@@ -36,7 +36,7 @@ public class DocumentRepository
             var patientDocuments = (from doc in dataContext.Documents
                                     join patient in dataContext.Patients
                                     on doc.PatientId equals patient.PatientId
-                                    where doc.PatientId == patientId 
+                                    where doc.PatientId == patientId && doc.ProviderId == providerId
                                     select new { Patients = patient , Documents = doc}).ToList();
 
             foreach (var item in patientDocuments)

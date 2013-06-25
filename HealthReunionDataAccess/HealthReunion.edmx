@@ -6,23 +6,44 @@
     <edmx:StorageModels>
     <Schema Namespace="HealthReunionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="HealthReunionModelStoreContainer">
+          <EntitySet Name="Appointments" EntityType="HealthReunionModel.Store.Appointments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Documents" EntityType="HealthReunionModel.Store.Documents" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Patients" EntityType="HealthReunionModel.Store.Patients" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Providers" EntityType="HealthReunionModel.Store.Providers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="HealthReunionModel.Store.Users" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK__Documents__Patie__35BCFE0A" Association="HealthReunionModel.Store.FK__Documents__Patie__35BCFE0A">
+          <AssociationSet Name="FK__Documents__Patie__534D60F1" Association="HealthReunionModel.Store.FK__Documents__Patie__534D60F1">
             <End Role="Patients" EntitySet="Patients" />
             <End Role="Documents" EntitySet="Documents" />
           </AssociationSet>
-          <AssociationSet Name="FK__Documents__Provi__36B12243" Association="HealthReunionModel.Store.FK__Documents__Provi__36B12243">
+          <AssociationSet Name="FK__Documents__Provi__5441852A" Association="HealthReunionModel.Store.FK__Documents__Provi__5441852A">
             <End Role="Providers" EntitySet="Providers" />
             <End Role="Documents" EntitySet="Documents" />
           </AssociationSet>
-          <AssociationSet Name="FK__Patients__Provid__37A5467C" Association="HealthReunionModel.Store.FK__Patients__Provid__37A5467C">
+          <AssociationSet Name="FK__Patients__Provid__5070F446" Association="HealthReunionModel.Store.FK__Patients__Provid__5070F446">
             <End Role="Providers" EntitySet="Providers" />
             <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Patients" Association="HealthReunionModel.Store.FK_Appointments_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Providers" Association="HealthReunionModel.Store.FK_Appointments_Providers">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="date" Nullable="false" />
+          <Property Name="ReasonForVisit" Type="varchar(max)" Nullable="false" />
+          <Property Name="Time" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Status" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Documents">
           <Key>
             <PropertyRef Name="DocumentId" />
@@ -61,12 +82,11 @@
           </Key>
           <Property Name="ProviderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ProviderName" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="ProviderLogo" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProviderDescription" Type="varchar" MaxLength="500" />
           <Property Name="PrivacyStatement" Type="varchar(max)" />
           <Property Name="AuthorizationReason" Type="varchar" MaxLength="500" />
           <Property Name="TermsOfUse" Type="varchar" MaxLength="500" />
-          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -79,7 +99,7 @@
           <Property Name="PatientId" Type="int" />
           <Property Name="IsDefaultPassword" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Documents__Patie__35BCFE0A">
+        <Association Name="FK__Documents__Patie__534D60F1">
           <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="1" />
           <End Role="Documents" Type="HealthReunionModel.Store.Documents" Multiplicity="*" />
           <ReferentialConstraint>
@@ -91,7 +111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Documents__Provi__36B12243">
+        <Association Name="FK__Documents__Provi__5441852A">
           <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
           <End Role="Documents" Type="HealthReunionModel.Store.Documents" Multiplicity="*" />
           <ReferentialConstraint>
@@ -103,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Patients__Provid__37A5467C">
+        <Association Name="FK__Patients__Provid__5070F446">
           <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
           <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="*" />
           <ReferentialConstraint>
@@ -115,6 +135,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Appointments_Patients">
+          <End Role="Patients" Type="HealthReunionModel.Store.Patients" Multiplicity="1" />
+          <End Role="Appointments" Type="HealthReunionModel.Store.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Providers">
+          <End Role="Providers" Type="HealthReunionModel.Store.Providers" Multiplicity="1" />
+          <End Role="Appointments" Type="HealthReunionModel.Store.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -122,21 +166,30 @@
         <EntityContainer Name="HealthReunionEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Documents" EntityType="HealthReunionModel.Document" />
           <EntitySet Name="Patients" EntityType="HealthReunionModel.Patient" />
-          <EntitySet Name="Providers" EntityType="HealthReunionModel.Provider" />
           <AssociationSet Name="FK__Documents__Patie__35BCFE0A" Association="HealthReunionModel.FK__Documents__Patie__35BCFE0A">
             <End Role="Patient" EntitySet="Patients" />
             <End Role="Document" EntitySet="Documents" />
           </AssociationSet>
-          <AssociationSet Name="FK__Documents__Provi__36B12243" Association="HealthReunionModel.FK__Documents__Provi__36B12243">
+          <EntitySet Name="Users" EntityType="HealthReunionModel.User" />
+          <EntitySet Name="Appointments" EntityType="HealthReunionModel.Appointment" />
+          <AssociationSet Name="FK_Appointments_Patients" Association="HealthReunionModel.FK_Appointments_Patients">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <EntitySet Name="Providers" EntityType="HealthReunionModel.Provider" />
+          <AssociationSet Name="FK_Appointments_Providers" Association="HealthReunionModel.FK_Appointments_Providers">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Documents__Provi__5441852A" Association="HealthReunionModel.FK__Documents__Provi__5441852A">
             <End Role="Provider" EntitySet="Providers" />
             <End Role="Document" EntitySet="Documents" />
           </AssociationSet>
-          <AssociationSet Name="FK__Patients__Provid__37A5467C" Association="HealthReunionModel.FK__Patients__Provid__37A5467C">
+          <AssociationSet Name="FK__Patients__Provid__5070F446" Association="HealthReunionModel.FK__Patients__Provid__5070F446">
             <End Role="Provider" EntitySet="Providers" />
             <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
-          <EntitySet Name="Users" EntityType="HealthReunionModel.User" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Document">
           <Key>
             <PropertyRef Name="DocumentId" />
@@ -148,7 +201,7 @@
           <Property Type="Binary" Name="Document1" MaxLength="Max" FixedLength="false" />
           <Property Type="String" Name="DocumentType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Patient" Relationship="HealthReunionModel.FK__Documents__Patie__35BCFE0A" FromRole="Document" ToRole="Patient" />
-          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK__Documents__Provi__36B12243" FromRole="Document" ToRole="Provider" />
+          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK__Documents__Provi__5441852A" FromRole="Document" ToRole="Provider" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -171,22 +224,8 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="Boolean" Name="RegisteredWithHealthVault" Nullable="false" />
           <NavigationProperty Name="Documents" Relationship="HealthReunionModel.FK__Documents__Patie__35BCFE0A" FromRole="Patient" ToRole="Document" />
-          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK__Patients__Provid__37A5467C" FromRole="Patient" ToRole="Provider" />
-        </EntityType>
-        <EntityType Name="Provider">
-          <Key>
-            <PropertyRef Name="ProviderId" />
-          </Key>
-          <Property Type="Int32" Name="ProviderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ProviderName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Binary" Name="ProviderLogo" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Type="String" Name="ProviderDescription" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PrivacyStatement" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="AuthorizationReason" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TermsOfUse" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Documents" Relationship="HealthReunionModel.FK__Documents__Provi__36B12243" FromRole="Provider" ToRole="Document" />
-          <NavigationProperty Name="Patients" Relationship="HealthReunionModel.FK__Patients__Provid__37A5467C" FromRole="Provider" ToRole="Patient" />
-          <Property Type="String" Name="Email" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Appointments" Relationship="HealthReunionModel.FK_Appointments_Patients" FromRole="Patient" ToRole="Appointment" />
+          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK__Patients__Provid__5070F446" FromRole="Patient" ToRole="Provider" />
         </EntityType>
         <Association Name="FK__Documents__Patie__35BCFE0A">
           <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="1" />
@@ -197,30 +236,6 @@
             </Principal>
             <Dependent Role="Document">
               <PropertyRef Name="PatientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Documents__Provi__36B12243">
-          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
-          <End Type="HealthReunionModel.Document" Role="Document" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="ProviderId" />
-            </Principal>
-            <Dependent Role="Document">
-              <PropertyRef Name="ProviderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Patients__Provid__37A5467C">
-          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
-          <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="ProviderId" />
-            </Principal>
-            <Dependent Role="Patient">
-              <PropertyRef Name="ProviderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -235,6 +250,83 @@
           <Property Type="Int32" Name="PatientId" />
           <Property Type="Boolean" Name="IsDefaultPassword" Nullable="false" />
         </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Type="Int32" Name="AppointmentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProviderId" Nullable="false" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="DateTime" Name="AppointmentDate" Nullable="false" Precision="0" />
+          <Property Type="String" Name="ReasonForVisit" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Time" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="HealthReunionModel.FK_Appointments_Patients" FromRole="Appointment" ToRole="Patient" />
+          <NavigationProperty Name="Provider" Relationship="HealthReunionModel.FK_Appointments_Providers" FromRole="Appointment" ToRole="Provider" />
+        </EntityType>
+        <Association Name="FK_Appointments_Patients">
+          <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="HealthReunionModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ProviderId" />
+          </Key>
+          <Property Type="Int32" Name="ProviderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ProviderName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProviderDescription" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PrivacyStatement" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AuthorizationReason" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TermsOfUse" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Appointments" Relationship="HealthReunionModel.FK_Appointments_Providers" FromRole="Provider" ToRole="Appointment" />
+          <NavigationProperty Name="Documents" Relationship="HealthReunionModel.FK__Documents__Provi__5441852A" FromRole="Provider" ToRole="Document" />
+          <NavigationProperty Name="Patients" Relationship="HealthReunionModel.FK__Patients__Provid__5070F446" FromRole="Provider" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_Appointments_Providers">
+          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="HealthReunionModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Documents__Provi__5441852A">
+          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="HealthReunionModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__Provid__5070F446">
+          <End Type="HealthReunionModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="HealthReunionModel.Patient" Role="Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ProviderId" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -275,20 +367,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Providers">
-            <EntityTypeMapping TypeName="HealthReunionModel.Provider">
-              <MappingFragment StoreEntitySet="Providers">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
-                <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
-                <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
-                <ScalarProperty Name="ProviderDescription" ColumnName="ProviderDescription" />
-                <ScalarProperty Name="ProviderLogo" ColumnName="ProviderLogo" />
-                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
-                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="HealthReunionModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -298,6 +376,32 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="HealthReunionModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ReasonForVisit" ColumnName="ReasonForVisit" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="HealthReunionModel.Provider">
+              <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
+                <ScalarProperty Name="AuthorizationReason" ColumnName="AuthorizationReason" />
+                <ScalarProperty Name="PrivacyStatement" ColumnName="PrivacyStatement" />
+                <ScalarProperty Name="ProviderDescription" ColumnName="ProviderDescription" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

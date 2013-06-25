@@ -17,6 +17,7 @@ namespace HealthReunionDataAccess
         public Patient()
         {
             this.Documents = new HashSet<Document>();
+            this.Appointments = new HashSet<Appointment>();
         }
     
         public int PatientId { get; set; }
@@ -37,6 +38,7 @@ namespace HealthReunionDataAccess
         public bool RegisteredWithHealthVault { get; set; }
     
         public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual Provider Provider { get; set; }
     }
 }

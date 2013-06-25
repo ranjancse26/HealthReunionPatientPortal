@@ -3,15 +3,5 @@
     ViewBag.Title = "Home Page";
 }
 
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                 <h2>@ViewBag.TitleMessage</h2>
-            </hgroup>      
-        </div>
-    </section>
-}
-
-<h2>Patient Documents </h2>
+<h2>Clinical Documents </h2>
 @Html.Partial("PatientDocumentsWebGrid", Model)

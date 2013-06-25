@@ -1,0 +1,82 @@
+﻿@model PatientPortal.Models.AppointmentViewModel
+
+@{
+    ViewBag.Title = "Request Appointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Appointment Request</h2>
+
+@using (Html.BeginForm("RequestAppointment", "Provider", FormMethod.Post, new { id = "appointmentForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Request Appointment</legend>
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProviderId)
+        </div>
+        <div class="editor-label">
+             @Html.DropDownListFor(p => p.ProviderId, Model.Providers.Items)
+        </div>       
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AppointmentDate)
+        </div>
+        <div class="editor-field">
+           <input type="date" id="AppointmentDate" name="AppointmentDate" value="@Model.AppointmentDate"/>
+            @Html.ValidationMessageFor(model => model.AppointmentDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReasonForVisit)
+        </div>
+        <div class="editor-field">
+            <textarea name="ReasonForVisit" cols="45" rows="5" style="width:auto"></textarea>
+            @Html.ValidationMessageFor(model => model.ReasonForVisit)
+        </div>
+
+        <p>
+            <button value="Search" class="btn btn-large btn-primary" onclick="CheckAvailability(); return false;">Check Availability</button> &nbsp; &nbsp; &nbsp; 
+            <button value="BookAppointment" id="BookAppointment" name="BookAppointment" class="btn btn-large btn-primary" onclick="SaveAppointment(); return false;">Book Appointment</button>
+        </p>
+   
+        
+        <div id="appointmentAvailabilityDiv"></div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+
+<script type="text/javascript">  
+    $(document).ready(function () {
+        $("#BookAppointment").hide();
+    });
+   
+    function SaveAppointment() {
+        $('#appointmentForm').submit();
+    }
+   
+    function CheckAvailability() {
+            $.ajax({
+                url: "/Provider/CheckAvailability",
+                data: "providerId=" + $('#ProviderId').val() + "&date=" + $('#AppointmentDate').val(),
+                type: "post",
+                success: function(response){
+                    $("#appointmentAvailabilityDiv").html(response);
+                    $("#BookAppointment").show();
+                },
+                error: function (data) {
+                    $("#appointmentAvailabilityDiv").html(data.responseText);
+                }   
+            }); 
+     }
+ </script>
+
+@Html.Partial("PatientAppointmentWebGrid", Model.AppointmentViewModelList)

@@ -1,0 +1,35 @@
+﻿@model  IEnumerable<PatientDocumentsModel>
+
+@{
+    var grid = new WebGrid(Model, canPage: false, canSort:false);
+}
+<style type="text/css">
+    .columnWidth {
+        width: 30%;
+    }
+</style>
+<script type="text/javascript">
+    function ShowDocument(documentId) {
+        $("#documentDiv").html($('#'+documentId).val());
+    }
+</script>
+
+@if (Model.Count() == 0)
+{
+    <p>No data found</p>
+}
+else
+{   
+   @grid.GetHtml(htmlAttributes: new {id ="grid"}, 
+     tableStyle : "table",
+            alternatingRowStyle : "alternate",
+            headerStyle : "header",
+            columns: grid.Columns(
+            grid.Column("Type", format: @<text>@item.DocumentType</text>, style: "columnWidth") ,
+            grid.Column("Date", format: @<text>@item.CreationTime</text>, style: "columnWidth") ,
+            grid.Column(null, null, format: @<input type="hidden" id="@item.DocumentId" value="@item.DocumentText"/>),
+            grid.Column("View  ", format: @<text><a id="viewDocument" href="javascript:ShowDocument(@item.DocumentId);" >View Document</a></text>)     
+      ))
+}
+
+<div id="documentDiv"></div>

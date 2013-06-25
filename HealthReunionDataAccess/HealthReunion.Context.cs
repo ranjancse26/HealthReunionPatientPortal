@@ -27,7 +27,8 @@ namespace HealthReunionDataAccess
     
         public DbSet<Document> Documents { get; set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<Provider> Providers { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Provider> Providers { get; set; }
     }
 }

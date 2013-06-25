@@ -18,6 +18,8 @@ C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\Microsoft.Web.WebPages.OAuth.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\Newtonsoft.Json.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\RestSharp.dll
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\SendGridMail.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\System.Net.Http.Formatting.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\System.Spatial.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\System.Web.Helpers.dll
@@ -37,6 +39,7 @@ C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\HealthReunionDataAccess.pdb
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\FactualDriver.xml
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\Newtonsoft.Json.xml
+C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\RestSharp.xml
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\EntityFramework.xml
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\System.Net.Http.Formatting.xml
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\System.Web.Helpers.xml
@@ -90,6 +93,3 @@ C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\obj\Debug\PatientPortal.csprojResolveAssemblyReference.cache
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\obj\Debug\PatientPortal.dll
 C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\obj\Debug\PatientPortal.pdb
-C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\RestSharp.dll
-C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\SendGridMail.dll
-C:\Users\Intel\Documents\Visual Studio 2012\Projects\PatientPortal\PatientPortal\bin\RestSharp.xml
